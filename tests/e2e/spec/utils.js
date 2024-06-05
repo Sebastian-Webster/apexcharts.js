@@ -3,6 +3,7 @@ import path from 'path'
 import pixelmatch from 'pixelmatch'
 import { PNG } from 'pngjs'
 import puppeteer from 'puppeteer'
+import { setTimeout as promisifiedTimeout } from 'timers/promises'
 
 export function chartVisualTest(type, filename, imageFilename, validate) {
   const rootDir = path.join(path.resolve(__dirname), '..', '..', '..')
@@ -10,7 +11,7 @@ export function chartVisualTest(type, filename, imageFilename, validate) {
   describe(`Rendering ${type} charts`, () => {
     it(
       `should render basic ${type} chart` +
-        (imageFilename ? '' : ' with missing values'),
+      (imageFilename ? '' : ' with missing values'),
       async () => {
         // BUG: set screen size?
         const browser = await puppeteer.launch()
@@ -18,7 +19,7 @@ export function chartVisualTest(type, filename, imageFilename, validate) {
         await page.goto(
           `file://${rootDir}/samples/vanilla-js/${type}/${filename}.html`
         )
-        await page.waitFor(2000)
+        await promisifiedTimeout(2000)
 
         await validate(page)
 

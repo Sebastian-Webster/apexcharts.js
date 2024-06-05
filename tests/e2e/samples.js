@@ -5,6 +5,8 @@ const path = require('path')
 const pixelmatch = require('pixelmatch')
 const { PNG } = require('pngjs')
 const { Cluster } = require('puppeteer-cluster')
+const { setTimeout: promisifiedTimeout } = require('timers/promises')
+const os = require('os')
 
 const { builds, executeBuildEntry } = require('../../build/config')
 const { extractSampleInfo } = require('../../samples/source')
@@ -45,7 +47,7 @@ async function processSample(page, sample, command) {
   await page.goto(`file://${htmlPath}`)
 
   // BUG: can be longer for some tests. Compare consequent screenshots to make sure it stabilized?
-  await page.waitFor(2200)
+  await promisifiedTimeout(2200)
 
   // Check that there are no console errors
   if (consoleErrors.length > 0) {
@@ -190,8 +192,8 @@ async function processSamples(command, paths) {
   }
 
   const cluster = await Cluster.launch({
-    concurrency: Cluster.CONCURRENCY_PAGE,
-    maxConcurrency: 5,
+    concurrency: Cluster.CONCURRENCY_BROWSER,
+    maxConcurrency: os.availableParallelism()
   })
 
   await cluster.task(async ({ page, data: sample }) => {
