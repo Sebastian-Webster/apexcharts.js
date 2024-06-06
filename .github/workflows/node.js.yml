@@ -30,26 +30,26 @@ jobs:
       run: git clone ${{ env.REPO_URL }}
     - name: Checkout Previous Commit
       if: github.event_name == 'push'
-      working-directory: $TEMP_REPO_DIR
+      working-directory: ${{ github.RUNNER_TEMP }}/${{ github.event.repository.name }}
       run: git checkout ${{ github.event.before }}
     - name: Install packages in temp repository
-      working-directory: $TEMP_REPO_DIR
+      working-directory: ${{ github.RUNNER_TEMP }}/${{ github.event.repository.name }}
       run: npm ci
     - name: Get Chrome
-      working-directory: $TEMP_REPO_DIR
+      working-directory: ${{ github.RUNNER_TEMP }}/${{ github.event.repository.name }}
       run: npx @puppeteer/browsers install chrome@stable
     - name: Use Node.js ${{ matrix.node-version }}
       uses: actions/setup-node@v4
       with:
         node-version: ${{ matrix.node-version }}
     - name: Generate E2E snapshots
-      working-directory: $TEMP_REPO_DIR
+      working-directory: ${{ github.RUNNER_TEMP }}/${{ github.event.repository.name }}
       run: npm run e2e:update
     - uses: actions/checkout@v4
     - name: Delete Current Snapshots
       run: rm -rf tests/e2e/snapshots
     - name: Copy Original Snapshots
-      run: cp -r $TEMP_REPO_DIR/tests/e2e/snapshots tests/e2e
+      run: cp -r ${{ github.RUNNER_TEMP }}/${{ github.event.repository.name }}/tests/e2e/snapshots tests/e2e
     - run: npm ci
     - run: npm run lint
     - run: npm test
