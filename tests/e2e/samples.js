@@ -231,7 +231,9 @@ async function processSamples(command, paths) {
       })
     }
     numCompleted++
-    process.stdout.clearLine()
+    if (process.stdout.isTTY) {
+      process.stdout.clearLine()
+    }
   })
 
   for (const sample of samples) {
