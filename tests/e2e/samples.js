@@ -122,6 +122,7 @@ async function processSample(page, sample, command) {
       throw err
     }
   } else if (command === 'update') {
+    console.log('Command is update')
     await fs.ensureDir(path.dirname(originalImgPath))
     fs.writeFileSync(originalImgPath, testImgBuffer)
   }
