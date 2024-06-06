@@ -214,6 +214,7 @@ async function processSamples(command, paths) {
     process.stdout.clearLine()
     console.log('test1')
     process.stdout.cursorTo(0)
+    console.log('test2')
     const percentComplete = Math.round((100 * numCompleted) / samples.length)
     process.stdout.write(`Processing samples: ${percentComplete}%`)
 
