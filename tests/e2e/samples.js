@@ -79,13 +79,13 @@ async function processSample(page, sample, command) {
   const originalImgPath = `${e2eDir}/snapshots/${relPath}.png`
 
   if (command === 'test') {
-    fs.writeFileSync(originalImgPath, testImgBuffer)
     // Compare screenshot to the original and throw error on differences
     const testImg = PNG.sync.read(testImgBuffer)
     // BUG: copy if original image doesn't exist and report in test results?
     const originalImg = PNG.sync.read(fs.readFileSync(originalImgPath))
     const { width, height } = testImg
     const diffImg = new PNG({ width, height })
+    fs.writeFileSync(originalImgPath, testImgBuffer)
 
     let numDiffs = null
     let err
