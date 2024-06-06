@@ -250,10 +250,6 @@ async function processSamples(command, paths) {
     console.log(
       chalk.green.bold(`${samples.length} tests completed in ${duration} sec.`)
     )
-
-    if (failedTests.length > 0) {
-      console.log(chalk.red.bold(`${failedTests.length} tests failed`))
-    }
   }
 
   for (const failedTest of failedTests) {
@@ -265,6 +261,11 @@ async function processSamples(command, paths) {
     if (!failedTest.error.hideStack) {
       console.log(failedTest.error.stack.split('\n').slice(1).join('\n'))
     }
+  }
+
+  if (failedTests.length > 0) {
+    console.log(chalk.red.bold(`${failedTests.length} tests failed`))
+    process.exit(1)
   }
 
   if (command === 'test') {
