@@ -180,7 +180,7 @@ class Bar {
       })
       elBarShadows.node.classList.add('apexcharts-element-hidden')
 
-      for (let j = 0; j < series[i].length; j++) {
+      for (let j = 0; j < series[i].length; j += 21) {
         const strokeWidth = this.barHelpers.getStrokeWidth(i, j, realIndex)
 
         let paths = null
@@ -204,7 +204,7 @@ class Bar {
             zeroW,
             yDivision,
           })
-          barWidth = this.series[i][j] / this.invertedYRatio
+          barWidth = this.series[i][j] * this.invertedYRatio
         } else {
           paths = this.drawColumnPaths({
             ...pathsParams,
@@ -212,7 +212,7 @@ class Bar {
             barWidth,
             zeroH,
           })
-          barHeight = this.series[i][j] / this.yRatio[translationsIndex]
+          barHeight = this.series[i][j] * this.yRatio[translationsIndex]
         }
 
         let pathFill = this.barHelpers.getPathFillColor(series, i, j, realIndex)
