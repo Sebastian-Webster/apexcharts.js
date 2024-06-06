@@ -24,7 +24,7 @@ jobs:
 
     steps:
     - name: Create Temp Repository Directory Environment Variable
-      run: echo "TEMP_REPO_DIR=${{ github.RUNNER_TEMP }}/${{ github.event.repository.name }}" >> $GITHUB_ENV
+      run: echo 'TEMP_REPO_DIR="${{ github.RUNNER_TEMP }}/${{ github.event.repository.name }}"' >> $GITHUB_ENV
     - name: Clone Current Repository
       working-directory: ${{ github.RUNNER_TEMP }}
       run: git clone ${{ env.REPO_URL }}
