@@ -41,6 +41,10 @@ jobs:
       run: cd ${{ env.TEMP_REPO_DIR }} && npm run e2e:update
     - name: List E2E folder
       run: cd ${{ env.TEMP_REPO_DIR }} && ls -a tests/e2e
+    - uses: actions/upload-artifact@v4
+      with:
+        name: snapshots
+        path: tests/e2e/snapshots
     - uses: actions/checkout@v4
     - name: Delete Current Snapshots
       run: rm -rf tests/e2e/snapshots
