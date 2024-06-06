@@ -64,3 +64,4 @@ jobs:
         name: after-snapshots ${{ matrix.node-version }}
         path: ${{ github.workspace }}/AfterArtifacts
     - run: npm run build --if-present
+    
