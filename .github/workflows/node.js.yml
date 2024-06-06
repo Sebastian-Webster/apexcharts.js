@@ -11,7 +11,7 @@ on:
 
 env:
   REPO_URL: https://github.com/${{ github.repository }}.git
-  TEMP_REPO_DIR: "${{ github.RUNNER_TEMP }} / ${{ github.event.repository.name }}"
+  TEMP_REPO_DIR: "${{ github.RUNNER_TEMP }}/ ${{ github.event.repository.name }}"
 
 jobs:
   build:
