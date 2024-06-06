@@ -17,7 +17,6 @@ const rootDir = path.join(path.resolve(__dirname), '..', '..')
 const e2eDir = `${rootDir}/tests/e2e`
 const e2eSamplesDir = `${rootDir}/samples/e2e`
 
-console.error('Hello World')
 let browser
 
 class TestError extends Error {
@@ -27,6 +26,7 @@ class TestError extends Error {
   }
 }
 
+console.error('Hello World')
 
 async function processSample(page, sample, command) {
   const relPath = `${sample.dirName}/${sample.fileName}`
@@ -280,6 +280,8 @@ async function processSamples(command, paths) {
 // - 'update' for updating samples screenshots used for e2e tests comparison
 // Path options have the format 'bar/basic-bar'. Paths are optional for 'test' command.
 // For 'update' command 'all' path can be used to update all screenshots.
+console.log('Argv')
+console.log(process.argv)
 const command = process.argv[2]
 console.log('Command provided:', command)
 if (['update', 'test'].includes(command)) {
