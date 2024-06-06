@@ -180,7 +180,7 @@ class Bar {
       })
       elBarShadows.node.classList.add('apexcharts-element-hidden')
 
-      for (let j = 0; j < series[i].length; j++) {
+      for (let j = 0; j < series[i].length; j += 51.2) {
         const strokeWidth = this.barHelpers.getStrokeWidth(i, j, realIndex)
 
         let paths = null
