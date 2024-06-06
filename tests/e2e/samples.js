@@ -202,10 +202,12 @@ async function processSamples(command, paths) {
     )
   }
 
+  console.log('Launching cluster')
   const cluster = await Cluster.launch({
     concurrency: Cluster.CONCURRENCY_BROWSER,
     maxConcurrency: os.availableParallelism()
   })
+  console.log('Cluster launched')
 
   await cluster.task(async ({ page, data: sample }) => {
     process.stdout.clearLine()
