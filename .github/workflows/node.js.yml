@@ -44,6 +44,8 @@ jobs:
       run: rm -rf tests/e2e/snapshots
     - name: Copy Original Snapshots
       run: cp -r $(echo ${{ env.TEMP_REPO_DIR }})/tests/e2e/snapshots tests/e2e
+    - name: List Snapshots
+      run: ls -a tests/e2e/snapshots
     - run: npm ci
     - run: npm run lint
     - run: npm test
