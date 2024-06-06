@@ -281,6 +281,7 @@ async function processSamples(command, paths) {
 // Path options have the format 'bar/basic-bar'. Paths are optional for 'test' command.
 // For 'update' command 'all' path can be used to update all screenshots.
 const command = process.argv[2]
+console.log('Command provided:', command)
 if (['update', 'test'].includes(command)) {
   processSamples(command, process.argv.slice(3))
     .catch((e) => console.log(e))
@@ -290,7 +291,7 @@ if (['update', 'test'].includes(command)) {
       }
     })
 } else {
-  throw new Error('Please provide a command')
+  console.error('Please provide a command')
 }
 
 // chartVisualTest('bubble', 'simple-bubble', true, async (page) => {
