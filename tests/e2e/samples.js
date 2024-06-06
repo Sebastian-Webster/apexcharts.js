@@ -289,6 +289,8 @@ if (['update', 'test'].includes(command)) {
         return browser.close()
       }
     })
+} else {
+  throw new Error('Please provide a command')
 }
 
 // chartVisualTest('bubble', 'simple-bubble', true, async (page) => {
