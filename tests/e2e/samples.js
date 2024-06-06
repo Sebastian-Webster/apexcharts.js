@@ -186,6 +186,7 @@ async function processSamples(command, paths) {
 
   // Build a list of samples to process
   let samples = extractSampleInfo()
+  console.log('Samples:', samples)
   if (paths.length === 0) {
     paths = ['all']
   }
