@@ -224,6 +224,7 @@ async function processSamples(command, paths) {
 
     // Make tests independent on machine timezone
     await page.emulateTimezone('Europe/London')
+    console.log('test5')
 
     try {
       console.log('Processing sample')
