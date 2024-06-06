@@ -83,9 +83,7 @@ async function processSample(page, sample, command) {
     // Compare screenshot to the original and throw error on differences
     const testImg = PNG.sync.read(testImgBuffer)
     // BUG: copy if original image doesn't exist and report in test results?
-    console.log('Original file path:', originalImgPath)
     const originalImg = PNG.sync.read(fs.readFileSync(originalImgPath))
-    console.log('Original Img:', originalImg)
     const { width, height } = testImg
     const diffImg = new PNG({ width, height })
 
@@ -130,10 +128,7 @@ async function processSample(page, sample, command) {
     const name = path.dirname(originalImgPath)
     console.log('Pathname:', name)
     await fs.ensureDir(name)
-    console.log('dir ensured')
     fs.writeFileSync(originalImgPath, testImgBuffer)
-    console.log('wrote file to:', originalImgPath)
-    console.log('Image buffer:', testImgBuffer)
   } else {
     console.log('Incorrect command:', command)
   }
