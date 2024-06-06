@@ -24,7 +24,7 @@ jobs:
         # See supported Node.js release schedule at https://nodejs.org/en/about/releases/
 
     steps:
-    - run: echo ${{ env.TEMP_REPO_DIR }}
+    - run: echo $RUNNER_TEMP/${{ github.event.repository.name }}
     - name: Clone Current Repository
       working-directory: ${{ github.RUNNER_TEMP }}
       run: git clone ${{ env.REPO_URL }}
