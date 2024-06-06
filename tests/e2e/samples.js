@@ -1,6 +1,5 @@
 
 const chalk = require('chalk')
-console.error('Hello World')
 const { spawnSync } = require('child_process')
 const fs = require('fs-extra')
 const path = require('path')
@@ -9,6 +8,7 @@ const { PNG } = require('pngjs')
 const { Cluster } = require('puppeteer-cluster')
 const { setTimeout: promisifiedTimeout } = require('timers/promises')
 const os = require('os')
+console.error('Hello World')
 
 const { builds, executeBuildEntry } = require('../../build/config')
 const { extractSampleInfo } = require('../../samples/source')
