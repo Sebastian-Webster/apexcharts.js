@@ -132,7 +132,7 @@ async function processSample(page, sample, command) {
     console.log('dir ensured')
     fs.writeFileSync(originalImgPath, testImgBuffer)
     console.log('wrote file to:', originalImgPath)
-    console.log(testImgBuffer)
+    console.log('Image buffer', testImgBuffer)
   } else {
     console.log('Incorrect command:', command)
   }
