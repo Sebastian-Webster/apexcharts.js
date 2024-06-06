@@ -25,6 +25,8 @@ class TestError extends Error {
   }
 }
 
+console.log('Hello World')
+
 async function processSample(page, sample, command) {
   const relPath = `${sample.dirName}/${sample.fileName}`
   const vanillaJsHtml = `${rootDir}/samples/vanilla-js/${relPath}.html`
