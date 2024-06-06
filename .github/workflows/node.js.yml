@@ -40,7 +40,7 @@ jobs:
     - name: Generate E2E snapshots
       run: cd ${{ env.TEMP_REPO_DIR }} && npm run e2e:update
     - name: List E2E snapshots
-      run: cd ${{ env.TEMP_REPO_DIR }} && ls -a .
+      run: cd ${{ env.TEMP_REPO_DIR }} && ls -a tests/e2e/snapshots
     - uses: actions/checkout@v4
     - name: Delete Current Snapshots
       run: rm -rf tests/e2e/snapshots
