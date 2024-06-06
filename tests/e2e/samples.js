@@ -208,7 +208,7 @@ async function processSamples(command, paths) {
     maxConcurrency: os.availableParallelism()
   })
   console.log('Cluster launched')
-  console.log('IsTTY', process.stdout.isTTY)
+  console.log('IsTTY:', process.stdout.isTTY)
 
   await cluster.task(async ({ page, data: sample }) => {
     console.log('Cluster task initiated...')
