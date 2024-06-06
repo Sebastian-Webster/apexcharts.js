@@ -204,7 +204,7 @@ class Bar {
             zeroW,
             yDivision,
           })
-          barWidth = this.series[i][j] * this.invertedYRatio
+          barWidth = this.series[i][j] / this.invertedYRatio
         } else {
           paths = this.drawColumnPaths({
             ...pathsParams,
@@ -212,7 +212,7 @@ class Bar {
             barWidth,
             zeroH,
           })
-          barHeight = this.series[i][j] * this.yRatio[translationsIndex]
+          barHeight = this.series[i][j] / this.yRatio[translationsIndex]
         }
 
         let pathFill = this.barHelpers.getPathFillColor(series, i, j, realIndex)
