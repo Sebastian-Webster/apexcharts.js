@@ -11,6 +11,7 @@ on:
 
 env:
   REPO_URL: https://github.com/${{ github.repository }}.git
+  TEMP_REPO_DIR: $RUNNER_TEMP/${{ github.event.repository.name }}
 
 jobs:
   build:
@@ -23,9 +24,7 @@ jobs:
         # See supported Node.js release schedule at https://nodejs.org/en/about/releases/
 
     steps:
-    - run: echo ${{ github.event.repository.name }}
-    - name: Create Temp Repository Directory Environment Variable
-      run: echo "TEMP_REPO_DIR=$(echo $RUNNER_TEMP)/$(echo ${{ github.event.repository.name }})" >> $GITHUB_ENV
+    - run: echo ${{ env.TEMP_REPO_DIR }}
     - name: Clone Current Repository
       working-directory: ${{ github.RUNNER_TEMP }}
       run: git clone ${{ env.REPO_URL }}
