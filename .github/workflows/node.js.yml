@@ -39,8 +39,8 @@ jobs:
         node-version: ${{ matrix.node-version }}
     - name: Generate E2E snapshots
       run: cd ${{ env.TEMP_REPO_DIR }} && npm run e2e:update
-    - name: List E2E folder
-      run: cd ${{ env.TEMP_REPO_DIR }} && ls -a tests/e2e
+    - name: List snapshots folder
+      run: cd ${{ env.TEMP_REPO_DIR }} && ls -a tests/e2e/snapshots
     - uses: actions/upload-artifact@v4
       with:
         name: snapshots
