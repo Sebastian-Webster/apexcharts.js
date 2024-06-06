@@ -190,6 +190,7 @@ async function processSamples(command, paths) {
   if (paths.length === 0) {
     paths = ['all']
   }
+  console.log(paths)
   if (paths.includes('all')) {
     if (command === 'update') {
       fs.emptyDir(`${e2eDir}/snapshots`)
