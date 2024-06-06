@@ -110,8 +110,8 @@ class Bar {
 
       let realIndex = w.globals.comboCharts ? seriesIndex[i] : i
 
-      let {columnGroupIndex} =
-              this.barHelpers.getGroupIndex(realIndex)
+      let { columnGroupIndex } =
+        this.barHelpers.getGroupIndex(realIndex)
 
       // el to which series will be drawn
       let elSeries = graphics.group({
@@ -153,7 +153,7 @@ class Bar {
       zeroH = initPositions.zeroH
 
       if (!this.horizontal) {
-        xArrj.push(x + barWidth / 2)
+        xArrj.push(x + barWidth / 3)
       }
 
       // eldatalabels
