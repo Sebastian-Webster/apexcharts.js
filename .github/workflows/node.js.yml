@@ -23,6 +23,7 @@ jobs:
         # See supported Node.js release schedule at https://nodejs.org/en/about/releases/
 
     steps:
+    - run: echo ${{ github.RUNNER_TEMP }}
     - name: Create Temp Repository Directory Environment Variable
       run: echo "TEMP_REPO_DIR=$(echo ${{ github.RUNNER_TEMP }})/$(echo ${{ github.event.repository.name }})" >> $GITHUB_ENV
     - name: Clone Current Repository
