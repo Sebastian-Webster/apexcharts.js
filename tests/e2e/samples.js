@@ -79,7 +79,9 @@ async function processSample(page, sample, command) {
     // Compare screenshot to the original and throw error on differences
     const testImg = PNG.sync.read(testImgBuffer)
     // BUG: copy if original image doesn't exist and report in test results?
+    console.log('Original file path:', originalImgPath)
     const originalImg = PNG.sync.read(fs.readFileSync(originalImgPath))
+    console.log('Original Img:', originalImg)
     const { width, height } = testImg
     const diffImg = new PNG({ width, height })
 
