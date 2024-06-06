@@ -211,15 +211,12 @@ async function processSamples(command, paths) {
   console.log('IsTTY:', process.stdout.isTTY)
 
   await cluster.task(async ({ page, data: sample }) => {
-    console.log('Cluster task initiated...')
-    //process.stdout.clearLine()
-    console.log('test1')
-    //process.stdout.cursorTo(0)
-    console.log('test2')
-    //const percentComplete = Math.round((100 * numCompleted) / samples.length)
-    console.log('test3')
-    //process.stdout.write(`Processing samples: ${percentComplete}%`)
-    console.log('test4')
+    if (process.stdout.isTTY) {
+      process.stdout.clearLine()
+      process.stdout.cursorTo(0)
+      const percentComplete = Math.round((100 * numCompleted) / samples.length)
+      process.stdout.write(`Processing samples: ${percentComplete}%`)
+    }
 
     // BUG: some chart are animated - need special processing. Some just need to be skipped.
 
