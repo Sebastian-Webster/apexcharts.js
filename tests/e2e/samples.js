@@ -191,11 +191,9 @@ async function processSamples(command, paths) {
 
   // Build a list of samples to process
   let samples = extractSampleInfo()
-  console.log('Samples:', samples)
   if (paths.length === 0) {
     paths = ['all']
   }
-  console.log('Paths:', paths)
   if (paths.includes('all')) {
     if (command === 'update') {
       console.log('Emptying snapshots directory')
@@ -212,8 +210,6 @@ async function processSamples(command, paths) {
     concurrency: Cluster.CONCURRENCY_BROWSER,
     maxConcurrency: os.availableParallelism()
   })
-  console.log('Cluster launched')
-  console.log('IsTTY:', process.stdout.isTTY)
 
   await cluster.task(async ({ page, data: sample }) => {
     if (process.stdout.isTTY) {
@@ -227,11 +223,9 @@ async function processSamples(command, paths) {
 
     // Make tests independent on machine timezone
     await page.emulateTimezone('Europe/London')
-    console.log('test5')
 
     try {
       await processSample(page, sample, command)
-      console.log('Processed sample...')
     } catch (e) {
       console.error('Error occurred while processing sample:', e)
       failedTests.push({
