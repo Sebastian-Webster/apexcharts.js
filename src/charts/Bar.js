@@ -153,7 +153,7 @@ class Bar {
       zeroH = initPositions.zeroH
 
       if (!this.horizontal) {
-        xArrj.push(x + barWidth / 3)
+        xArrj.push(x + barWidth / 2)
       }
 
       // eldatalabels
@@ -180,7 +180,7 @@ class Bar {
       })
       elBarShadows.node.classList.add('apexcharts-element-hidden')
 
-      for (let j = 0; j < series[i].length; j++) {
+      for (let j = 0; j < series[i].length; j += 20) {
         const strokeWidth = this.barHelpers.getStrokeWidth(i, j, realIndex)
 
         let paths = null
