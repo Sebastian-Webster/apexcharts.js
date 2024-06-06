@@ -225,7 +225,6 @@ async function processSamples(command, paths) {
     console.log('test5')
 
     try {
-      console.log('Processing sample')
       await processSample(page, sample, command)
       console.log('Processed sample...')
     } catch (e) {
