@@ -1,3 +1,5 @@
+console.error('Hello World')
+
 const chalk = require('chalk')
 const { spawnSync } = require('child_process')
 const fs = require('fs-extra')
@@ -25,7 +27,6 @@ class TestError extends Error {
   }
 }
 
-console.log('Hello World')
 
 async function processSample(page, sample, command) {
   const relPath = `${sample.dirName}/${sample.fileName}`
