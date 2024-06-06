@@ -218,6 +218,7 @@ async function processSamples(command, paths) {
     const percentComplete = Math.round((100 * numCompleted) / samples.length)
     console.log('test3')
     process.stdout.write(`Processing samples: ${percentComplete}%`)
+    console.log('test4')
 
     // BUG: some chart are animated - need special processing. Some just need to be skipped.
 
