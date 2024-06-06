@@ -11,8 +11,6 @@ on:
 
 env:
   REPO_URL: https://github.com/${{ github.repository }}.git
-  REPO_NAME_WITH_SLASH: /${{ github.event.repository.name }}
-  TEMP_REPO_DIR: ${{ env.REPO_NAME_WITH_SLASH }}${{ github.RUNNER_TEMP }}
 
 jobs:
   build:
@@ -25,35 +23,33 @@ jobs:
         # See supported Node.js release schedule at https://nodejs.org/en/about/releases/
 
     steps:
-    - name: Echo
-      run: echo ${{ env.REPO_URL }}
-    - name: Echo 2
-      run: echo ${{ env.TEMP_REPO_DIR }}
+    - name: Create Temp Repository Directory Environment Variable
+      run: echo "TEMP_REPO_DIR=${{ github.RUNNER_TEMP }}/${{ github.event.repository.name }}" >> $GITHUB_ENV
     - name: Clone Current Repository
       working-directory: ${{ github.RUNNER_TEMP }}
       run: git clone ${{ env.REPO_URL }}
     - name: Checkout Previous Commit
       if: github.event_name == 'push'
-      working-directory: ${{ env.TEMP_REPO_DIR }}
+      working-directory: $TEMP_REPO_DIR
       run: git checkout ${{ github.event.before }}
     - name: Install packages in temp repository
-      working-directory: ${{ env.TEMP_REPO_DIR }}
+      working-directory: $TEMP_REPO_DIR
       run: npm ci
     - name: Get Chrome
-      working-directory: ${{ env.TEMP_REPO_DIR }}
+      working-directory: $TEMP_REPO_DIR
       run: npx @puppeteer/browsers install chrome@stable
     - name: Use Node.js ${{ matrix.node-version }}
       uses: actions/setup-node@v4
       with:
         node-version: ${{ matrix.node-version }}
     - name: Generate E2E snapshots
-      working-directory: ${{ env.TEMP_REPO_DIR }}
+      working-directory: $TEMP_REPO_DIR
       run: npm run e2e:update
     - uses: actions/checkout@v4
     - name: Delete Current Snapshots
       run: rm -rf tests/e2e/snapshots
     - name: Copy Original Snapshots
-      run: cp -r ${{ env.TEMP_REPO_DIR }}/tests/e2e/snapshots tests/e2e
+      run: cp -r $TEMP_REPO_DIR/tests/e2e/snapshots tests/e2e
     - run: npm ci
     - run: npm run lint
     - run: npm test
