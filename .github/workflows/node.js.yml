@@ -48,7 +48,7 @@ jobs:
     - uses: actions/upload-artifact@v4
       with:
         name: prev-snapshots ${{ matrix.node-version }}
-        path: ${{ github.workspace }}/Artifacts
+        path: ${{ github.workspace }}/PreviousArtifacts
     - uses: actions/checkout@v4
     - name: Delete Current Snapshots
       run: rm -rf tests/e2e/snapshots
