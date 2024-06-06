@@ -42,12 +42,12 @@ jobs:
     - name: List snapshots folder
       run: cd ${{ env.TEMP_REPO_DIR }} && ls -a tests/e2e/snapshots
     - name: Make artifacts folder
-      run: mkdir ${{ github.workspace }}/Artifacts
-    - name: Copy snapshots to artifacts
-      run: cp -r $(echo ${{ env.TEMP_REPO_DIR }})/tests/e2e/snapshots ${{ github.workspace }}/Artifacts
+      run: mkdir ${{ github.workspace }}/PreviousArtifacts ${{ github.workspace }}/AfterArtifacts
+    - name: Copy previous snapshots to artifacts
+      run: cp -r $(echo ${{ env.TEMP_REPO_DIR }})/tests/e2e/snapshots ${{ github.workspace }}/PreviousArtifacts
     - uses: actions/upload-artifact@v4
       with:
-        name: snapshots ${{ matrix.node-version }}
+        name: prev-snapshots ${{ matrix.node-version }}
         path: ${{ github.workspace }}/Artifacts
     - uses: actions/checkout@v4
     - name: Delete Current Snapshots
@@ -59,4 +59,9 @@ jobs:
     - run: npm ci
     - run: npm run lint
     - run: npm test
+    - run: cp -r tests/e2e/snapshots ${{ github.workspace }}/AfterArtifacts
+    - uses: actions/upload-artifact@v4
+      with:
+        name: after-snapshots ${{ matrix.node-version }}
+        path: ${{ github.workspace }}/AfterArtifacts
     - run: npm run build --if-present
