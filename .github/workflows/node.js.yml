@@ -41,10 +41,14 @@ jobs:
       run: cd ${{ env.TEMP_REPO_DIR }} && npm run e2e:update
     - name: List snapshots folder
       run: cd ${{ env.TEMP_REPO_DIR }} && ls -a tests/e2e/snapshots
+    - name: Make artifacts folder
+      run: mkdir ${{ github.workspace }}/Artifacts
+    - name: Copy snapshots to artifacts
+      run: cp -r $(echo ${{ env.TEMP_REPO_DIR }})/tests/e2e/snapshots ${{ github.workspace }}/Artifacts
     - uses: actions/upload-artifact@v4
       with:
         name: snapshots
-        path: $GITHUB_WORKSPACE/tests/e2e/snapshots
+        path: ${{ github.workspace }}/Artifacts
     - uses: actions/checkout@v4
     - name: Delete Current Snapshots
       run: rm -rf tests/e2e/snapshots
