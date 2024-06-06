@@ -117,6 +117,10 @@ async function processSample(page, sample, command) {
 
       const mismatchPercent = ((100 * numDiffs) / width / height).toFixed(2)
 
+      if (mismatchPercent) {
+        console.log('Mismatch found:', mismatchPercent, '%', 'for image with path:', originalImgPath)
+      }
+
       if (mismatchPercent > 5) {
         throw new TestError(`Screenshot changed by ${mismatchPercent}%`)
       }
