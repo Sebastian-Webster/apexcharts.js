@@ -25,7 +25,7 @@ jobs:
 
     steps:
     - name: Clone Current Repository
-      working-directory: ${{ RUNNER_TEMP }}
+      working-directory: ${{ github.RUNNER_TEMP }}
       run: git clone ${{ env.REPO_URL }}
     - name: Checkout Previous Commit
       if: github.event_name == 'push'
