@@ -280,8 +280,7 @@ async function processSamples(command, paths) {
 // - 'update' for updating samples screenshots used for e2e tests comparison
 // Path options have the format 'bar/basic-bar'. Paths are optional for 'test' command.
 // For 'update' command 'all' path can be used to update all screenshots.
-console.log('Argv')
-console.log(process.argv)
+console.log('Argv:', process.argv)
 const command = process.argv[2]
 console.log('Command provided:', command)
 if (['update', 'test'].includes(command)) {
