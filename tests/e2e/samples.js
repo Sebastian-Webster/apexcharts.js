@@ -222,8 +222,11 @@ async function processSamples(command, paths) {
     await page.emulateTimezone('Europe/London')
 
     try {
+      console.log('Processing sample')
       await processSample(page, sample, command)
+      console.log('Processed sample')
     } catch (e) {
+      console.error('Error occurred while processing sample:', e)
       failedTests.push({
         path: `${sample.dirName}/${sample.fileName}`,
         error: e,
