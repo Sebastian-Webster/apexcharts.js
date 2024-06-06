@@ -11,13 +11,13 @@ const os = require('os')
 
 const { builds, executeBuildEntry } = require('../../build/config')
 const { extractSampleInfo } = require('../../samples/source')
-console.error('Hello World')
 
 const rootDir = path.join(path.resolve(__dirname), '..', '..')
 
 const e2eDir = `${rootDir}/tests/e2e`
 const e2eSamplesDir = `${rootDir}/samples/e2e`
 
+console.error('Hello World')
 let browser
 
 class TestError extends Error {
