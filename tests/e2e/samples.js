@@ -131,7 +131,7 @@ async function processSample(page, sample, command) {
     await fs.ensureDir(name)
     console.log('dir ensured')
     fs.writeFileSync(originalImgPath, testImgBuffer)
-    console.log('wrote file')
+    console.log('wrote file to:', originalImgPath)
   } else {
     console.log('Incorrect command:', command)
   }
