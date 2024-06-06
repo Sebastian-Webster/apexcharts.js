@@ -8,10 +8,10 @@ const { PNG } = require('pngjs')
 const { Cluster } = require('puppeteer-cluster')
 const { setTimeout: promisifiedTimeout } = require('timers/promises')
 const os = require('os')
-console.error('Hello World')
 
 const { builds, executeBuildEntry } = require('../../build/config')
 const { extractSampleInfo } = require('../../samples/source')
+console.error('Hello World')
 
 const rootDir = path.join(path.resolve(__dirname), '..', '..')
 
