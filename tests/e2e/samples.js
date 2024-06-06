@@ -212,6 +212,7 @@ async function processSamples(command, paths) {
   await cluster.task(async ({ page, data: sample }) => {
     console.log('Cluster task initiated...')
     process.stdout.clearLine()
+    console.log('test1')
     process.stdout.cursorTo(0)
     const percentComplete = Math.round((100 * numCompleted) / samples.length)
     process.stdout.write(`Processing samples: ${percentComplete}%`)
