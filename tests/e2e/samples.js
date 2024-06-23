@@ -92,17 +92,25 @@ async function processSample(page, sample, command) {
 
   await page.goto(`file://${htmlPath}`)
 
-  //Wait for all network requests to finish
-  await page.waitForNetworkIdle()
+  let wait = true;
 
-  //Wait for all intervals in the page to have been cleared
-  await page.waitForFunction(() => window.activeIntervalCount === 0)
+  while (wait) {
+    //Wait for all intervals in the page to have been cleared
+    await page.waitForFunction(() => window.activeIntervalCount === 0)
 
-  //Wait for all timers in the page to have all executed
-  await page.waitForFunction(() => window.activeTimerCount === 0)
+    //Wait for all timers in the page to have all executed
+    await page.waitForFunction(() => window.activeTimerCount === 0)
 
-  //Wait for the chart animation to end
-  await page.waitForFunction(() => chart.w.globals.animationEnded)
+    //Wait for the chart animation to end
+    await page.waitForFunction(() => chart.w.globals.animationEnded)
+
+    //Wait for all network requests to finish
+    await page.waitForNetworkIdle()
+
+    wait = await page.evaluate(() => {
+      return !(window.activeIntervalCount === 0 && window.activeTimerCount === 0 && chart.w.globals.animationEnded)
+    })
+  }
 
   // Check that there are no console errors
   if (consoleErrors.length > 0) {
@@ -169,6 +177,7 @@ async function processSample(page, sample, command) {
       const mismatchPercent = ((100 * numDiffs) / width / height).toFixed(2)
 
       if (mismatchPercent > 5) {
+        console.log('Failure:', failure)
         throw new TestError(`Screenshot changed by ${mismatchPercent}%`)
       }
     } else if (err) {
