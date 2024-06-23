@@ -17,7 +17,7 @@ jobs:
     strategy:
       fail-fast: false
       matrix:
-        node-version: [16.x, 17.x, 18.x, 19.x, 20.x, 21.x, 22.x]
+        node-version: [18.x, 19.x, 20.x, 21.x, 22.x]
         os: [windows-2019, windows-2022, macos-11, macos-12, macos-13, macos-14, ubuntu-20.04, ubuntu-22.04, ubuntu-24.04]
         # See supported Node.js release schedule at https://nodejs.org/en/about/releases/
 
