@@ -326,7 +326,7 @@ async function processSamples(command, paths) {
 
   if (command === 'test') {
     const data = spawnSync(
-      `${rootDir}/node_modules/.bin/nyc`,
+      path.resolve(rootDir, 'node_modules/.bin/nyc')
       ['report', '--reporter=html'],
       { cwd: rootDir }
     )
