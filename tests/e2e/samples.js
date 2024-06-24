@@ -113,6 +113,7 @@ async function processSample(page, sample, command) {
 
     if (wait) {
       console.log('WAIT!!!')
+      console.log(await page.evaluate(() => window.activeIntervalCount), await page.evaluate(() => window.activeTimerCount), await page.evaluate(() => chart.w.globals.animationEnded))
     }
   }
 
