@@ -325,17 +325,17 @@ async function processSamples(command, paths) {
   }
 
   if (command === 'test') {
-    const { status } = spawnSync(
+    const data = spawnSync(
       `${rootDir}/node_modules/.bin/nyc`,
       ['report', '--reporter=html'],
       { cwd: rootDir }
     )
 
-    if (status === 0) {
+    if (data.status === 0) {
       console.log('')
       console.log(`Code coverage report was generated at coverage/index.html`)
     } else {
-      throw new Error('Code coverage report failed to generate')
+      throw new Error(data)
     }
   }
 }
