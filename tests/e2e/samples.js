@@ -137,7 +137,7 @@ async function processSample(page, sample, command) {
   } catch (e) {
     testImgBuffer = await page.screenshot()
   }
-  const originalImgPath = `${e2eDir}/snapshots/${relPath}.png`
+  const originalImgPath = path.resolve(e2eDir, 'snapshots', `${relPath}.png`)
 
   if (command === 'test') {
     // Compare screenshot to the original and throw error on differences
