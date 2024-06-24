@@ -330,7 +330,7 @@ async function processSamples(command, paths) {
     console.log('nyc path:', nycPath)
 
     if (os.platform() === 'win32') {
-      nycPath += '.cmd'
+      nycPath += '.ps1'
     }
 
     const data = spawnSync(
