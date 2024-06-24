@@ -332,7 +332,7 @@ async function processSamples(command, paths) {
     console.log(fs.readdirSync(path.resolve(rootDir, 'node_modules/.bin')).filter(item => item.startsWith('nyc')))
 
     const data = spawnSync(
-      nycPath,
+      'npx nyc',
       ['report', '--reporter=html'],
       { cwd: rootDir }
     )
