@@ -230,8 +230,8 @@ async function processSamples(command, paths) {
 
     // Build the version of apexcharts instrumented with istanbul to record test coverage
     await updateBundle({
-      entry: `${rootDir}/src/apexcharts.js`,
-      dest: `${e2eSamplesDir}/apexcharts.e2e.js`,
+      entry: path.normalize(`${rootDir}/src/apexcharts.js`),
+      dest: path.normalize(`${e2eSamplesDir}/apexcharts.e2e.js`),
       format: 'umd',
       env: 'development',
       istanbul: true,
