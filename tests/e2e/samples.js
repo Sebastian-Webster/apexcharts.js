@@ -124,7 +124,7 @@ async function processSample(page, sample, command) {
   if (command === 'test') {
     const coverage = await page.evaluate(() => window.__coverage__)
     await fs.writeJson(
-      `${rootDir}/.nyc_output/${sample.dirName}-${sample.fileName}.json`,
+      path.resolve(rootDir, '.nyc_output', `${sample.dirName}-${sample.fileName}.json`),
       coverage
     )
   }
