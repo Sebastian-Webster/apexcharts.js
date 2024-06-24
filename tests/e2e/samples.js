@@ -335,7 +335,8 @@ async function processSamples(command, paths) {
       console.log('')
       console.log(`Code coverage report was generated at coverage/index.html`)
     } else {
-      throw new Error(data)
+      console.error(data)
+      throw new Error('Code coverage report failed to generate')
     }
   }
 }
