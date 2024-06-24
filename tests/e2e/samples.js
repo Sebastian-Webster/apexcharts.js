@@ -329,10 +329,6 @@ async function processSamples(command, paths) {
     let nycPath = path.resolve(rootDir, 'node_modules/.bin/nyc')
     console.log('nyc path:', nycPath)
 
-    if (os.platform() === 'win32') {
-      nycPath += '.ps1'
-    }
-
     const data = spawnSync(
       nycPath,
       ['report', '--reporter=html'],
