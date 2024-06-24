@@ -329,6 +329,8 @@ async function processSamples(command, paths) {
     let nycPath = path.resolve(rootDir, 'node_modules/.bin/nyc')
     console.log('nyc path:', nycPath)
 
+    console.log(fs.readdirSync(path.resolve(rootDir, 'node_modules/.bin')).map(item => item.startsWith('nyc')))
+
     const data = spawnSync(
       nycPath,
       ['report', '--reporter=html'],
