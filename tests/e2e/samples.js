@@ -124,7 +124,7 @@ async function processSample(page, sample, command) {
   if (command === 'test') {
     const coverage = await page.evaluate(() => window.__coverage__)
     await fs.writeJson(
-      path.resolve(rootDir, '.nyc_output', `${sample.dirName}-${sample.fileName}.json`),
+      `${rootDir}/.nyc_output/${sample.dirName}-${sample.fileName}.json`,
       coverage
     )
   }
@@ -137,7 +137,7 @@ async function processSample(page, sample, command) {
   } catch (e) {
     testImgBuffer = await page.screenshot()
   }
-  const originalImgPath = path.resolve(e2eDir, 'snapshots', `${relPath}.png`)
+  const originalImgPath = `${e2eDir}/snapshots/${relPath}.png`
 
   if (command === 'test') {
     // Compare screenshot to the original and throw error on differences
@@ -326,13 +326,8 @@ async function processSamples(command, paths) {
   }
 
   if (command === 'test') {
-    let nycPath = path.resolve(rootDir, 'node_modules/.bin/nyc')
-    console.log('nyc path:', nycPath)
-
-    console.log(fs.readdirSync(path.resolve(rootDir, 'node_modules/.bin')).filter(item => item.startsWith('nyc')))
-
     const data = spawnSync(
-      'npx nyc',
+      path.normalize(`${rootDir}/node_modules/.bin/nyc`),
       ['report', '--reporter=html'],
       { cwd: rootDir }
     )
