@@ -110,6 +110,10 @@ async function processSample(page, sample, command) {
     wait = await page.evaluate(() => {
       return !(window.activeIntervalCount === 0 && window.activeTimerCount === 0 && chart.w.globals.animationEnded)
     })
+
+    if (wait) {
+      console.log('WAIT!!!')
+    }
   }
 
   // Check that there are no console errors
