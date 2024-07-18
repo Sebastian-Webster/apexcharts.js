@@ -4,6 +4,8 @@
 # Test coverage results, base repository snapshots, head repository snapshots and diffs, sample HTML, and the apexcharts build are all uploaded to the workflow artifacts
 # The diffs, build, and coverage results get uploaded even if the test fails for manual inspection and to make debugging easier
 
+# There is also a job that tests to make sure new changes produce reproducible results in e2e tests
+
 name: Node.js CI
 
 on:
@@ -11,7 +13,8 @@ on:
     branches: [ test1 ]
 
 jobs:
-  build:
+  test-and-build:
+    name: Test & Build
 
     runs-on: ${{ matrix.os }}
 
@@ -82,3 +85,31 @@ jobs:
       with:
         name: node${{ matrix.node-version }}${{ runner.os }}results
         path: ${{ runner.temp }}/artifacts
+
+  test-reproducibility:
+    name: Test Reproducibility
+    needs: [test-and-build]
+
+    runs-on: ${{ matrix.os }}
+
+    strategy:
+      fail-fast: false
+      matrix:
+        os: [windows-latest, macos-latest, ubuntu-latest]
+        node-version: [18.x, 20.x, 22.x]
+
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+      - name: Setup Node.js ${{ matrix.node-version }}
+        uses: actions/setup-node@v4
+        with:
+          node-version: ${{ matrix.node-version }}
+      - name: Install packages
+        run: npm ci
+      - name: Build samples
+        run: npm run build:samples
+      - name: Generate e2e snapshots
+        run: npm run e2e:update
+      - name: Run tests
+        run: npm run test:ci
