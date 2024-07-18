@@ -51,3 +51,4 @@ async function buildFromConfig(options) {
 function getSize(content) {
   return (content.length / 1024).toFixed(2) + 'kb'
 }
+//
