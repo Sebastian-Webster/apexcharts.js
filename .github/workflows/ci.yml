@@ -83,13 +83,13 @@ jobs:
       if: '!cancelled()'
       uses: actions/upload-artifact@v4
       with:
-        name: node${{ matrix.node-version }}${{ runner.os }}results
+        name: node${{ matrix.node-version }}${{ matrix.os }}results
         path: ${{ runner.temp }}/artifacts
     - name: Upload Repo
       if: '!cancelled()'
       uses: actions/upload-artifact@v4
       with:
-        name: node${{ matrix.node-version }}${{ runner.os }}repo
+        name: node${{ matrix.node-version }}${{ matrix.os }}repo
         path: ${{ github.workspace }}
 
   test-reproducibility:
