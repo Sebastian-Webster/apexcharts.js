@@ -14,7 +14,6 @@ on:
 
 jobs:
   ci:
-    name: Test & Build
 
     runs-on: ${{ matrix.os }}
 
@@ -57,7 +56,6 @@ jobs:
         path: ${{ github.workspace }}
 
   install:
-    name: Test & Build
 
     runs-on: ${{ matrix.os }}
 
