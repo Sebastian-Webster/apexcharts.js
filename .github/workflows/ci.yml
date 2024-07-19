@@ -85,6 +85,12 @@ jobs:
       with:
         name: node${{ matrix.node-version }}${{ runner.os }}results
         path: ${{ runner.temp }}/artifacts
+    - name: Upload Repo
+      if: '!cancelled()'
+      uses: actions/upload-artifact@v4
+      with:
+        name: node${{ matrix.node-version }}${{ runner.os }}repo
+        path: ${{ github.workspace }}
 
   test-reproducibility:
     name: Test Reproducibility
