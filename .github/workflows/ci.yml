@@ -18,8 +18,12 @@ jobs:
     strategy:
       fail-fast: false
       matrix:
-        node-version: [18.x, 20.x, 22.4.1]
-        os: [windows-latest, macos-latest, ubuntu-latest]
+        node-version: [22.4.1]
+        os: [macos-latest]
+        iter: [1, 2, 3, 4, 5]
+        iterOne: [1, 2, 3, 4, 5]
+        iterTwo: [1, 2, 3, 4, 5]
+        iterThree: [1, 2]
         # See supported Node.js release schedule at https://nodejs.org/en/about/releases/
 
     steps:
@@ -88,8 +92,12 @@ jobs:
     strategy:
       fail-fast: false
       matrix:
-        node-version: [18.x, 20.x, 22.4.1]
-        os: [windows-latest, macos-latest, ubuntu-latest]
+        node-version: [22.4.1]
+        os: [macos-latest]
+        iter: [1, 2, 3, 4, 5]
+        iterOne: [1, 2, 3, 4, 5]
+        iterTwo: [1, 2, 3, 4, 5]
+        iterThree: [1, 2]
 
     steps:
       - name: Checkout repository
