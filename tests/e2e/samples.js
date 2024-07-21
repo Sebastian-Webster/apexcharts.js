@@ -122,7 +122,7 @@ async function processSample(page, sample, command) {
   } while (wait)
   
   const chartData = await page.evaluate(() => {
-    return chart.w.globals.animationEnded
+    return chart.w.globals
   })
 
   // Check that there are no console errors
