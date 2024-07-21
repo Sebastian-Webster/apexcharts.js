@@ -100,7 +100,7 @@ async function processSample(page, sample, command) {
 
   await page.goto(`file://${htmlPath}`)
 
-  let chart;
+  let chartData;
 
   let wait;
   do {
@@ -121,9 +121,11 @@ async function processSample(page, sample, command) {
     wait = await page.evaluate(() => {
       return !(window.activeIntervalCount === 0 && window.activeTimerCount === 0 && chart.w.globals.animationEnded)
     })
-
-    if (!wait) chart = await page.evaluate(() => chart)
   } while (wait)
+  
+  chartData = await page.evaluate(() => {
+    return chart
+  })
 
   // Check that there are no console errors
   if (consoleErrors.length > 0) {
@@ -199,7 +201,7 @@ async function processSample(page, sample, command) {
       const mismatchPercent = ((100 * numDiffs) / width / height).toFixed(2)
 
       if (mismatchPercent > 5) {
-        console.error('MISMATCH:', chart)
+        console.error('MISMATCH:', chartData)
         throw new TestError(`Screenshot changed by ${mismatchPercent}%`)
       }
     } else if (err) {
