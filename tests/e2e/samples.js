@@ -100,8 +100,6 @@ async function processSample(page, sample, command) {
 
   await page.goto(`file://${htmlPath}`)
 
-  let chartData;
-
   let wait;
   do {
     //Wait for all intervals in the page to have been cleared
@@ -123,8 +121,8 @@ async function processSample(page, sample, command) {
     })
   } while (wait)
   
-  chartData = await page.evaluate(() => {
-    return chart
+  const chartData = await page.evaluate(() => {
+    return chart.w.globals.animationEnded
   })
 
   // Check that there are no console errors
