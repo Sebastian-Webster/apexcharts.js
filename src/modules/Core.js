@@ -95,12 +95,7 @@ export default class Core {
       transform: `translate(${cnf.chart.offsetX}, ${cnf.chart.offsetY})`,
     })
 
-    gl.dom.Paper.node.style.background =
-      cnf.theme.mode === 'dark' && !cnf.chart.background
-        ? '#424242'
-        : cnf.theme.mode === 'light' && !cnf.chart.background
-        ? '#fff'
-        : cnf.chart.background
+    gl.dom.Paper.node.style.background = 'red'
 
     this.setSVGDimensions()
 
@@ -482,8 +477,8 @@ export default class Core {
       let offsetY = cnf.chart.sparkline.enabled
         ? 0
         : gl.axisCharts
-        ? cnf.chart.parentHeightOffset
-        : 0
+          ? cnf.chart.parentHeightOffset
+          : 0
 
       gl.dom.Paper.node.parentNode.parentNode.style.minHeight =
         gl.svgHeight + offsetY + 'px'
