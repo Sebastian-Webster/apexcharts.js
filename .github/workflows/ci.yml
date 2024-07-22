@@ -79,7 +79,7 @@ jobs:
       if: '!cancelled()'
       uses: actions/upload-artifact@v4
       with:
-        name: node${{ matrix.node-version }}${{ matrix.iterOne }}${{ matrix.iterTwo }}results
+        name: onenode${{ matrix.node-version }}${{ matrix.iterOne }}${{ matrix.iterTwo }}results
         path: ${{ runner.temp }}/artifacts
 
   buildtwo:
@@ -150,7 +150,7 @@ jobs:
       if: '!cancelled()'
       uses: actions/upload-artifact@v4
       with:
-        name: node${{ matrix.node-version }}${{ matrix.iterOne }}${{ matrix.iterTwo }}results
+        name: twonode${{ matrix.node-version }}${{ matrix.iterOne }}${{ matrix.iterTwo }}results
         path: ${{ runner.temp }}/artifacts
 
   buildthree:
@@ -221,7 +221,7 @@ jobs:
       if: '!cancelled()'
       uses: actions/upload-artifact@v4
       with:
-        name: node${{ matrix.node-version }}${{ matrix.iterOne }}${{ matrix.iterTwo }}results
+        name: threenode${{ matrix.node-version }}${{ matrix.iterOne }}${{ matrix.iterTwo }}results
         path: ${{ runner.temp }}/artifacts
 
   buildfour:
@@ -292,7 +292,7 @@ jobs:
       if: '!cancelled()'
       uses: actions/upload-artifact@v4
       with:
-        name: node${{ matrix.node-version }}${{ matrix.iterOne }}${{ matrix.iterTwo }}results
+        name: fournode${{ matrix.node-version }}${{ matrix.iterOne }}${{ matrix.iterTwo }}results
         path: ${{ runner.temp }}/artifacts
   
   buildfive:
@@ -363,6 +363,6 @@ jobs:
       if: '!cancelled()'
       uses: actions/upload-artifact@v4
       with:
-        name: node${{ matrix.node-version }}${{ matrix.iterOne }}${{ matrix.iterTwo }}results
+        name: fivenode${{ matrix.node-version }}${{ matrix.iterOne }}${{ matrix.iterTwo }}results
         path: ${{ runner.temp }}/artifacts
 
