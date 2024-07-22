@@ -11,17 +11,17 @@ on:
     branches: [ test2 ]
 
 jobs:
-  macosthirteen:
-    runs-on: macos-12
+  macos:
+    runs-on: ${{ matrix.os }}
 
     strategy:
       fail-fast: false
       matrix:
         node-version: [22.4.1]
+        os: [macos-12, macos-13]
         iter: [1, 2, 3, 4, 5]
         iterOne: [1, 2, 3, 4, 5]
         iterTwo: [1, 2, 3, 4, 5]
-        iterThree: [1, 2]
         # See supported Node.js release schedule at https://nodejs.org/en/about/releases/
 
     steps:
@@ -80,6 +80,6 @@ jobs:
       if: '!cancelled()'
       uses: actions/upload-artifact@v4
       with:
-        name: ${{ matrix.iter }}${{ matrix.iterOne }}${{ matrix.iterTwo }}${{ matrix.iterThree }}
+        name: ${{ matrix.iter }}${{ matrix.iterOne }}${{ matrix.iterTwo }}${{ matrix.os }}
         path: ${{ runner.temp }}/artifacts
 
