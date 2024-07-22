@@ -11,82 +11,8 @@ on:
     branches: [ test2 ]
 
 jobs:
-  ubuntu:
-    name: Ubuntu
-    runs-on: ubuntu-latest
-
-    strategy:
-      fail-fast: false
-      matrix:
-        node-version: [22.4.1]
-        iter: [1, 2, 3, 4, 5]
-        iterOne: [1, 2, 3, 4, 5]
-        iterTwo: [1, 2, 3, 4, 5]
-        iterThree: [1, 2]
-        # See supported Node.js release schedule at https://nodejs.org/en/about/releases/
-
-    steps:
-    - name: Create base repository artifacts folder
-      run: mkdir -p ${{ runner.temp }}/artifacts/base-repository
-    - name: Create head repository artifacts folder
-      run: mkdir -p ${{ runner.temp }}/artifacts/head-repository
-
-    - name: Checkout base repository
-      uses: actions/checkout@v4
-      with:
-        repository: ${{ github.event.pull_request.base.repo.full_name }}
-        ref: ${{ github.event.pull_request.base.ref }}
-    - name: Use Node.js ${{ matrix.node-version }}
-      uses: actions/setup-node@v4
-      with:
-        node-version: ${{ matrix.node-version }}
-    - name: Install base repository's packages
-      run: npm ci
-    - name: Generate base repository's samples
-      run: npm run build:samples
-    - name: Copy Base Repository Samples To Artifacts Folder
-      run: cp -r samples/vanilla-js ${{ runner.temp }}/artifacts/base-repository/samples
-    - name: Generate base repository's e2e snapshots
-      run: npm run e2e:update
-    - name: Copy Base Repository e2e Snapshots To Artifacts Folder
-      run: cp -r tests/e2e/snapshots ${{ runner.temp }}/artifacts/base-repository/snapshots
-
-    - name: Checkout head repository
-      uses: actions/checkout@v4
-    - name: Install head repository's packages
-      run: npm ci
-    - name: Generate head repository's samples
-      run: npm run build:samples
-    - name: Copy Head Repository Samples To Artifacts Folder
-      run: cp -r samples/vanilla-js ${{ runner.temp }}/artifacts/head-repository/samples
-    - name: Delete snapshots folder
-      run: rm -r tests/e2e/snapshots
-    - name: Copy snapshots from base repository
-      run: cp -r ${{ runner.temp }}/artifacts/base-repository/snapshots tests/e2e
-    - name: Run tests
-      run: npm run test:ci
-    - name: Copy Head Repository Diffs To Artifacts Folder
-      if: '!cancelled()'
-      run: cp -r tests/e2e/diffs ${{ runner.temp }}/artifacts/head-repository/diffs
-    - name: Build apexcharts
-      if: '!cancelled()'
-      run: npm run build --if-present
-    - name: Copy Head Repository Build To Artifacts Folder
-      if: '!cancelled()'
-      run: cp -r dist ${{ runner.temp }}/artifacts/head-repository/build
-    - name: Copy Head Repository Test Coverage To Artifacts Folder
-      if: '!cancelled()'
-      run: cp -r coverage ${{ runner.temp }}/artifacts/head-repository/coverage
-    - name: Upload Artifacts
-      if: '!cancelled()'
-      uses: actions/upload-artifact@v4
-      with:
-        name: ${{ matrix.iter }}${{ matrix.iterOne }}${{ matrix.iterTwo }}${{ matrix.iterThree }}
-        path: ${{ runner.temp }}/artifacts
-
-  windows:
-    name: Windows
-    runs-on: windows-latest
+  macosthirteen:
+    runs-on: macos-13
 
     strategy:
       fail-fast: false
