@@ -19,7 +19,7 @@ jobs:
       fail-fast: false
       matrix:
         node-version: [22.4.1]
-        os: [ubuntu-latest]
+        os: [windows-latest]
         iter: [1, 2, 3, 4, 5]
         iterOne: [1, 2, 3, 4, 5]
         iterTwo: [1, 2, 3, 4, 5]
@@ -84,34 +84,4 @@ jobs:
       with:
         name: ${{ matrix.iter }}${{ matrix.iterOne }}${{ matrix.iterTwo }}${{ matrix.iterThree }}
         path: ${{ runner.temp }}/artifacts
-
-  test-reproducibility:
-    name: Test Reproducibility
-    runs-on: ${{ matrix.os }}
-
-    strategy:
-      fail-fast: false
-      matrix:
-        node-version: [22.4.1]
-        os: [ubuntu-latest]
-        iter: [1, 2, 3, 4, 5]
-        iterOne: [1, 2, 3, 4, 5]
-        iterTwo: [1, 2, 3, 4, 5]
-        iterThree: [1, 2]
-
-    steps:
-      - name: Checkout repository
-        uses: actions/checkout@v4
-      - name: Setup Node ${{ matrix.node-version }}
-        uses: actions/setup-node@v4
-        with:
-          node-version: ${{ matrix.node-version }}
-      - name: Install packages
-        run: npm ci
-      - name: Build samples
-        run: npm run build:samples
-      - name: Generate snapshots
-        run: npm run e2e:update
-      - name: Run tests
-        run: npm run test:ci
 
