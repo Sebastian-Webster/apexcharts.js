@@ -120,10 +120,22 @@ async function processSample(page, sample, command) {
       return !(window.activeIntervalCount === 0 && window.activeTimerCount === 0 && chart.w.globals.animationEnded)
     })
   } while (wait)
-  
-  const chartData = await page.evaluate(() => {
-    return JSON.stringify(chart.w.globals)
-  })
+
+  const chartData = JSON.parse(await page.evaluate(() => {
+    const getCircularReplacer = () => {
+      const seen = new WeakSet();
+      return (key, value) => {
+        if (typeof value === "object" && value !== null) {
+          if (seen.has(value)) {
+            return `circular`;
+          }
+          seen.add(value);
+        }
+        return value;
+      };
+    };
+    return JSON.stringify(chart, getCircularReplacer())
+  }))
 
   // Check that there are no console errors
   if (consoleErrors.length > 0) {
