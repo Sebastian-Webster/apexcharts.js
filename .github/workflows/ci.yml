@@ -10,10 +10,6 @@ on:
   pull_request:
     branches: [ main ]
 
-defaults:
-  run:
-    shell: bash
-
 env:
   CHROME_DEVEL_SANDBOX: /opt/google/chrome/chrome-sandbox
 
@@ -29,7 +25,7 @@ jobs:
         # See supported Node.js release schedule at https://nodejs.org/en/about/releases/
 
     steps:
-    - run: echo "$CHROME_DEVEL_SANDBOX"
+    - run: ls -l $CHROME_DEVEL_SANDBOX
 
     - name: Create base repository artifacts folder
       run: mkdir -p ${{ runner.temp }}/artifacts/base-repository
