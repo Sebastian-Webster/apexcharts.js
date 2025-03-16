@@ -10,6 +10,8 @@ on:
   pull_request:
     branches: [ main ]
 
+# Part of support for Ubuntu 23.10+
+# https://chromium.googlesource.com/chromium/src/+/main/docs/security/apparmor-userns-restrictions.md
 env:
   CHROME_DEVEL_SANDBOX: /opt/google/chrome/chrome-sandbox
 
@@ -25,12 +27,11 @@ jobs:
         # See supported Node.js release schedule at https://nodejs.org/en/about/releases/
 
     steps:
+    # https://chromium.googlesource.com/chromium/src/+/main/docs/security/apparmor-userns-restrictions.md
     - name: Support for Ubuntu 23.10+
       run: |
         wget https://dl.google.com/linux/direct/google-chrome-stable_current_amd64.deb
         sudo dpkg -i google-chrome-stable_current_amd64.deb
-
-    - run: ls -l $CHROME_DEVEL_SANDBOX
 
     - name: Create base repository artifacts folder
       run: mkdir -p ${{ runner.temp }}/artifacts/base-repository
@@ -100,16 +101,24 @@ jobs:
         node-version: [18.x, 20.x, 22.x]
 
     steps:
+      # https://chromium.googlesource.com/chromium/src/+/main/docs/security/apparmor-userns-restrictions.md
+      - name: Support for Ubuntu 23.10+
+        run: |
+          wget https://dl.google.com/linux/direct/google-chrome-stable_current_amd64.deb
+          sudo dpkg -i google-chrome-stable_current_amd64.deb
+
       - name: Checkout repository
         uses: actions/checkout@v4
       - name: Setup Node ${{ matrix.node-version }}
         uses: actions/setup-node@v4
         with:
           node-version: ${{ matrix.node-version }}
+
       - name: Install packages
         run: npm ci
       - name: Build samples
         run: npm run build:samples
+        
       - name: Generate snapshots
         run: npm run e2e:update
       - name: Run tests
