@@ -28,6 +28,7 @@ jobs:
         sudo dpkg -i google-chrome-stable_current_amd64.deb
         echo 'export CHROME_DEVEL_SANDBOX=/opt/google/chrome/chrome-sandbox' >> ~/.bashrc
         source ~/.bashrc
+        ls /opt/google/chrome
 
     - name: Create base repository artifacts folder
       run: mkdir -p ${{ runner.temp }}/artifacts/base-repository
