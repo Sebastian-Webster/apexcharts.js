@@ -25,6 +25,11 @@ jobs:
         # See supported Node.js release schedule at https://nodejs.org/en/about/releases/
 
     steps:
+    - name: Support for Ubuntu 23.10+
+      run: |
+        wget https://dl.google.com/linux/direct/google-chrome-stable_current_amd64.deb
+        sudo dpkg -i google-chrome-stable_current_amd64.deb
+
     - run: ls -l $CHROME_DEVEL_SANDBOX
 
     - name: Create base repository artifacts folder
