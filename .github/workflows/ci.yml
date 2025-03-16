@@ -22,6 +22,13 @@ jobs:
         # See supported Node.js release schedule at https://nodejs.org/en/about/releases/
 
     steps:
+    - name: Support Puppeteer for Ubuntu 23.10+
+      run: |
+        wget https://dl.google.com/linux/direct/google-chrome-stable_current_amd64.deb
+        sudo dpkg -i google-chrome-stable_current_amd64.deb
+        sudo apt --fix-broken install
+        echo 'export CHROME_DEVEL_SANDBOX=/opt/google/chrome/chrome-sandbox' >> ~/.bashrc
+
     - name: Create base repository artifacts folder
       run: mkdir -p ${{ runner.temp }}/artifacts/base-repository
     - name: Create head repository artifacts folder
