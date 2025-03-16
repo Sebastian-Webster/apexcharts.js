@@ -28,7 +28,7 @@ jobs:
     steps:
     - name: Support Puppeteer for Ubuntu 23.10+
       run: |
-        echo 'export CHROME_DEVEL_SANDBOX=/opt/google/chrome/chrome-sandbox' >> ~/.bashrc
+        export CHROME_DEVEL_SANDBOX=/opt/google/chrome/chrome-sandbox
         source ~/.bashrc
         ls /opt/google/chrome
         echo "$CHROME_DEVEL_SANDBOX"
