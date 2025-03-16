@@ -29,9 +29,10 @@ jobs:
     - name: Support Puppeteer for Ubuntu 23.10+
       run: |
         export CHROME_DEVEL_SANDBOX=/opt/google/chrome/chrome-sandbox
-        source ~/.bashrc
         ls /opt/google/chrome
         echo "$CHROME_DEVEL_SANDBOX"
+
+    - run: echo "$CHROME_DEVEL_SANDBOX"
 
     - name: Create base repository artifacts folder
       run: mkdir -p ${{ runner.temp }}/artifacts/base-repository
